@@ -1,6 +1,128 @@
+/* Root variables */
+:root {
+  --primary-100: #cee0f3;
+  --primary-200: #a9c2e6;
+  --primary-300: #84a4d9;
+  --primary-400: #5f86cc;
+  --primary-500: #3a68bf;
+  --primary-600: #2c5491;
+  --primary-700: #1e3f63;
+  --primary-800: #102b35;
+  --primary-900: #050e16;
+  --secondary-100: #e9ece9;
+  --secondary-200: #d4d9d4;
+  --secondary-300: #bfc5bf;
+  --secondary-400: #aab1aa;
+  --secondary-500: #959c95;
+  --secondary-600: #757a75;
+  --secondary-700: #565956;
+  --secondary-800: #373b37;
+  --secondary-900: #181c18;
+  --text-100: #fdfffc;
+  --text-400: #8cc5c7;
+  --text-600: #52809d;
+  --text-900: #0d1f31;
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+/* Global Styles */
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--primary-900);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: auto;
+  color: var(--text-100);
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(var(--primary-800), var(--primary-900));
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 100;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 200;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+p,
+a,
+li,
+ul {
+  margin: 0;
+  list-style-type: none;
+  text-decoration: none;
+  inset: none;
+  padding-left: 0;
+  color: inherit;
+}
+
+a {
+  color: var(--text-400);
+}
+
+/******* Mobile View ***************/
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  text-decoration: none;
+}
+
+#top-header > .siteName {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+#top-header > #tools {
+  align-self: flex-start;
+  font-size: small;
+}
+
+nav {
+  margin-bottom: 1rem;
+}
+
+nav > ul {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  margin: 0;
+  background-color: var(--primary-700);
+}
+
+main {
+  flex-grow: 1;
 }
