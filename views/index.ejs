@@ -1,17 +1,55 @@
-<section id="hero"></section>
+<% const upgrades = [ { name: "Flux Capacitor", img:
+"/images/upgrades/flux-cap.png" }, { name: "Flame Decals", img:
+"/images/upgrades/flame.jpg" }, { name: "Hub Cap", img:
+"/images/upgrades/hub-cap.jpg" }, { name: "Bumper Sticker", img:
+"/images/upgrades/bumper_sticker.jpg" }, ]; %> <% const reviewObjects = [ {
+review: "So fast it's almost like traveling in time.", rating: 4 }, { review:
+"Coolest ride on the road.", rating: 4 }, { review: "I'm feeling McFly!",
+rating: 5 }, { review: "The most futuristic ride of our day.", rating: 4.5 }, {
+review: "80's livin and I love it!", rating: 5 }, ]; %>
+
+<section id="hero">
+  <h2>Welcome to CSE Motors</h2>
+  <div class="relative flex justify-center">
+    <div id="floaterCTA" class="absolute">
+      <h3>DMC Delorean</h3>
+      <ul>
+        <li>3 cup holders</li>
+        <li>Superman doors</li>
+        <li>Fuzzy dice!</li>
+      </ul>
+      <div id="ctaImg">
+        <img src="/images/site/own_today.png" alt="own today button img" />
+      </div>
+    </div>
+    <div id="heroImgWrapper">
+      <img src="/images/vehicles/delorean.jpg" alt="Delorean" />
+    </div>
+  </div>
+</section>
 
 <section id="information">
   <section id="reviews">
-    <h4>DMC Delorean Reviews</h4>
-    <ul>
-      <li>"So fast it's almost like traveling in time." (4/5)</li>
-      <li>"Coolest ride on the road." (4/5)</li>
-      <li>"I'm feeling McFly!" (5/5)</li>
-      <li>"The most futuristic ride of our day." (4.5/5)</li>
-      <li>"80's livin and I love it!" (5/5)</li>
+    <h3>DMC Delorean Reviews</h3>
+
+    <ul id="reviews">
+      <% reviewObjects.forEach((review) => { %>
+      <li><%= `${review.review} (${review.rating}/5)` %></li>
+      <% }) %>
     </ul>
   </section>
   <section id="upgrades">
-    <h4>Delorean Upgrades</h4>
+    <h3>Delorean Upgrades</h3>
+
+    <ul id="upgradeItems">
+      <% upgrades.forEach((upgrade) => { %>
+      <li>
+        <div id="upgradeImgWrapper">
+          <img src="<%= upgrade.img %>" alt="<%= upgrade.name %>" />
+        </div>
+        <a><%= upgrade.name %></a>
+      </li>
+      <% }) %>
+    </ul>
   </section>
 </section>
