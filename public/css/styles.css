@@ -44,8 +44,9 @@ body {
   color: var(--text-900);
 }
 
-nav {
+nav > ul > li > a {
   color: var(--text-100);
+  text-decoration: none;
 }
 
 #wrapper {
@@ -137,7 +138,8 @@ ul {
 }
 
 a {
-  color: var(--text-600);
+  color: var(--text-400);
+  text-decoration: none;
 }
 
 /******* Utility Classes *******/
@@ -206,6 +208,11 @@ nav > ul {
 
 main {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 #information {
@@ -265,4 +272,46 @@ main {
   object-fit: cover;
   width: 100%;
   flex-grow: 1;
+}
+
+#contentHeader {
+  justify-self: center;
+}
+
+#inv-display > li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--primary-800);
+}
+
+#inv-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#inv-display > li > a > img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.namePrice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.namePrice > hr {
+  width: 100%;
+}
+
+.namePrice > h2 {
+  text-align: center;
+}
+
+.namePrice > span {
+  text-align: center;
+  color: var(--text-100);
 }

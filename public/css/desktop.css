@@ -17,6 +17,12 @@
     margin-bottom: 1rem;
   }
 
+  #inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
   #heroImgWrapper {
     width: 70%;
   }
