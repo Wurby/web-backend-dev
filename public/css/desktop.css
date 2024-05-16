@@ -31,4 +31,23 @@
     top: 2rem;
     left: 2rem;
   }
+
+  #detailWrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #detailImage {
+    width: 80%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+
+  #detailPriceBlock {
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+  }
 }
