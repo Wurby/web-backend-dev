@@ -143,21 +143,6 @@ Util.buildVehicleDetail = async function (data) {
   return vehicle;
 };
 
-// {
-//   inv_id: 12,
-//   inv_make: 'Ford',
-//   inv_model: 'Model T',
-//   inv_year: '1921',
-//   inv_description: 'The Ford Model T can be a bit tricky to drive. It was the first car to be put into production. You can get it in any color you want as long as it is black.',
-//   inv_image: '/images/vehicles/model-t.jpg',
-//   inv_thumbnail: '/images/vehicles/model-t-tn.jpg',
-//   inv_price: '30000',
-//   inv_miles: 26357,
-//   inv_color: 'Black',
-//   classification_id: 5,
-//   classification_name: 'Sedan'
-// }
-
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for
