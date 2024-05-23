@@ -2,15 +2,22 @@
 <h1 class="contentHeader"><%= title %></h1>
 <% } else { res.redirect('/') } %>
 
+<p><%- messages() %></p>
+<% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
 <section class="form-card">
-  <p><%- messages() %></p>
-  <form action="/login" method="POST">
+  <form action="/account/login" method="POST">
     <label for="account_email"
       >Email:
       <input
         type="email"
         placeholder="example@youremail.com"
-        autocomplete="email"
+        autocomplete="off"
         id="account_email"
         name="account_email"
         required
@@ -23,7 +30,7 @@
         placeholder="Enter your password."
         id="account_password"
         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
-        autocomplete="current-password"
+        autocomplete="off"
         name="account_password"
         required
       />

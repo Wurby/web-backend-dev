@@ -19,6 +19,7 @@
         autocomplete="given-name"
         placeholder="First Name"
         name="account_firstname"
+        value="<%= locals.account_firstname %>"
         required
       />
     </label>
@@ -28,6 +29,7 @@
         type="text"
         autocomplete="family-name"
         placeholder="Last Name"
+        value="<%= locals.account_lastname %>"
         name="account_lastname"
         required
       />
@@ -37,6 +39,7 @@
       <input
         type="email"
         placeholder="Enter your email"
+        value="<%= locals.account_email %>"
         autocomplete="email"
         name="account_email"
         required
