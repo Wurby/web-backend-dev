@@ -143,6 +143,38 @@ Util.buildVehicleDetail = async function (data) {
   return vehicle;
 };
 
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
+
+Util.defaultClassificationFormItems = {
+  inv_make: null,
+  inv_model: null,
+  inv_year: null,
+  inv_description: null,
+  inv_image: "/images/vehicles/no-image.png",
+  inv_thumbnail: "/images/vehicles/no-image-tn.png",
+  inv_price: null,
+  inv_miles: null,
+  inv_color: null,
+  classification_id: null,
+};
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for

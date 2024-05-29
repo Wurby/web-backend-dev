@@ -1,0 +1,113 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="contentHeader"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+<!-- message section -->
+<%- messages() %> <% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id -->
+
+<form class="form-card" action="/inv/add-inventory" method="POST">
+  <label
+    >Make
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      placeholder="Ford"
+      required
+      value="<%= inv_make %>"
+    />
+  </label>
+  <label
+    >Model
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      placeholder="Mustang"
+      required
+      value="<%= inv_model %>"
+    />
+  </label>
+  <label
+    >Year
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      placeholder="2021"
+      required
+      pattern="^[0-9]{4}$"
+      value="<%= inv_year %>"
+    />
+  </label>
+  <label
+    >Description
+    <textarea
+      id="inv_description"
+      name="inv_description"
+      placeholder="This is a great car!"
+      required
+    >
+        <%= inv_description %>
+</textarea
+    >
+  </label>
+  <input
+    type="hidden"
+    id="inv_image"
+    name="inv_image"
+    value="/images/vehicles/no-image.png"
+    required
+  />
+  <input
+    type="hidden"
+    id="inv_thumbnail"
+    name="inv_thumbnail"
+    value="/images/vehicles/no-image-tn.png"
+    required
+  />
+  <label
+    >Price
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      placeholder="25000"
+      required
+      value="<%= inv_price %>"
+    />
+  </label>
+  <label
+    >Miles
+    <input
+      type="number"
+      id="inv_miles"
+      name="inv_miles"
+      placeholder="10000"
+      required
+      value="<%= inv_miles %>"
+    />
+  </label>
+  <label
+    >Color
+    <input
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      placeholder=" Red"
+      required
+      value="<%= inv_color %>"
+    />
+  </label>
+  <label>Classification <%- classificationList %> </label>
+
+  <button type="submit">Add Vehicle</button>
+</form>

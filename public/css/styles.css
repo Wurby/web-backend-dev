@@ -206,11 +206,17 @@ nav {
 nav > ul {
   display: flex;
   justify-content: space-around;
-  height: 2rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-height: 2rem;
   align-items: center;
-  padding: 0 1rem 0 1rem;
   margin: 0;
   background-color: var(--primary-700);
+}
+
+nav > ul > li {
+  min-height: 2rem;
+  padding: 0.5rem;
 }
 
 main {
@@ -402,7 +408,35 @@ form > label > input {
   border-bottom: var(--primary-500) 2px solid;
 }
 
+form > label > textarea {
+  padding: 0.25rem;
+  width: 60%;
+  background-color: var(--primary-800);
+  color: var(--text-100);
+  border: none;
+  border-bottom: var(--primary-500) 2px solid;
+}
+
+form > label > select {
+  padding: 0.25rem;
+  width: 60%;
+  background-color: var(--primary-800);
+  color: var(--text-100);
+  border: none;
+  border-bottom: var(--primary-500) 2px solid;
+}
+
+form > label > textarea:focus {
+  outline: none;
+  border-bottom: var(--primary-400) 2px solid;
+}
+
 form > label > input:focus {
+  outline: none;
+  border-bottom: var(--primary-400) 2px solid;
+}
+
+form > label > select:focus {
   outline: none;
   border-bottom: var(--primary-400) 2px solid;
 }
@@ -448,4 +482,62 @@ form > button:active {
 form > label > input:invalid:not(:placeholder-shown) {
   color: var(--text-error);
   border-bottom: var(--text-error) 2px dashed;
+}
+
+form > label > textarea:invalid:not(:placeholder-shown) {
+  color: var(--text-error);
+  border-bottom: var(--text-error) 2px dashed;
+}
+
+form > label > select:invalid:not(:placeholder-shown) {
+  color: var(--text-error);
+  border-bottom: var(--text-error) 2px dashed;
+}
+
+#management-btn-wrapper {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+#management-btn-wrapper > button {
+  padding: 0.5rem;
+  background-color: var(--primary-500);
+  color: var(--text-100);
+  border: none;
+  width: 50%;
+  border-radius: 0.5rem;
+}
+
+#management-btn-wrapper > button:active {
+  background-color: var(--primary-700);
+  transform: translateY(2px);
+}
+
+.alert {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--text-error);
+  color: var(--text-100);
+  border-radius: 0.5rem;
+}
+
+.alert-danger {
+  background-color: var(--text-error);
+}
+
+.notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--text-error);
+  color: var(--text-100);
+  border-radius: 0.5rem;
 }

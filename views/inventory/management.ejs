@@ -1,0 +1,26 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="contentHeader"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+<!-- message section -->
+<%- messages() %> <% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<section>
+  <% if (errors) { %>
+  <ul class="alert alert-danger">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <div id="management-btn-wrapper">
+    <a href="/inv/add-classification">Add new Classification</a>
+    <a href="/inv/add-inventory">Add new Vehicle</a>
+  </div>
+</section>
