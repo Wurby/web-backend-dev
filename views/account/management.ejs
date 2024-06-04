@@ -10,3 +10,20 @@
   <% }) %>
 </ul>
 <% } %>
+
+<!-- Add an "update account information" link to the view, so a client can update their information. This link should be present for all clients. The link must pass through the accounts router and be handled by the accounts controller. The id of the logged-in client should be passed through the link.
+The update account link should appear above where the "Manage Inventory" heading is located. -->
+
+<% if (locals.accountData.account_type === 'Client') { %>
+<h2>Welcome <%= locals.accountData.account_firstname %></h2>
+<p>
+  <a href="/account/update/<%-locals.accountData.account_id %>"
+    >Update Account Information</a
+  >
+</p>
+<% } else { %>
+<h2>Welcome <%= locals.accountData.account_firstname %></h2>
+<p><a href="/account/update">Update Account Information</a></p>
+<h3>Inventory Management</h3>
+<p><a href="/inv/">Manage Inventory</a></p>
+<% } %>

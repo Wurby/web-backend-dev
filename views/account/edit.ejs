@@ -1,0 +1,115 @@
+<% if (title) { %>
+<h1 class="contentHeader"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<p><%- messages() %></p>
+<% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- The view will also contain two forms: 1) "Account Update", consisting of the first and last names and email and 2) "Change Password" to change the password. -->
+
+<form class="form-card" action="/account/update/" method="post">
+  <label for="account_firstname"
+    >First Name
+    <input
+      type="text"
+      autocomplete="given-name"
+      class="form-control"
+      required
+      id="account_firstname"
+      name="account_firstname"
+      value="<%= locals.accountData.account_firstname %>"
+    />
+  </label>
+  <label for="account_lastname"
+    >Last Name
+    <input
+      type="text"
+      autocomplete="family-name"
+      class="form-control"
+      required
+      id="account_lastname"
+      name="account_lastname"
+      value="<%= locals.accountData.account_lastname %>"
+    />
+  </label>
+  <label for="account_email"
+    >Email
+    <input
+      type="email"
+      autocomplete="email"
+      required
+      class="form-control"
+      id="account_email"
+      name="account_email"
+      value="<%= locals.accountData.account_email %>"
+    />
+  </label>
+  <input
+    type="hidden"
+    id="account_id"
+    required
+    name="account_id"
+    value="<%= locals.accountData.account_id %>"
+  />
+  <button type="submit" class="btn btn-primary">Update Account</button>
+</form>
+
+<form class="form-card" action="/account/change-password" method="post">
+  <input
+    type="email"
+    hidden
+    required
+    autocomplete="email"
+    id="account_email"
+    name="account_email"
+    value="<%= locals.accountData.account_email %>"
+  />
+  <div class="text-center">
+    <p>Password must:</p>
+    <ul id="password-requirements">
+      <li>Be at least 12 characters long</li>
+      <li>Contain at least one uppercase letter</li>
+      <li>Contain at least one number</li>
+      <li>Contain at least one special character</li>
+    </ul>
+  </div>
+  <label for="account_password"
+    >Password
+    <input
+      type="password"
+      required
+      autocomplete="new-password"
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      class="form-control"
+      id="account_password"
+      name="account_password"
+    />
+  </label>
+
+  <label for="account_password_confirm"
+    >Confirm Password
+    <input
+      type="password"
+      required
+      autocomplete="new-password"
+      class="form-control"
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      id="account_password_confirm"
+      name="account_password_confirm"
+    />
+  </label>
+  <input
+    type="hidden"
+    required
+    id="account_id"
+    name="account_id"
+    value="<%= locals.accountData.account_id %>"
+  />
+  <button type="submit" class="btn btn-primary">Change Password</button>
+</form>

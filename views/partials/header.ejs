@@ -5,8 +5,17 @@
     >
   </span>
   <div id="tools">
+    <% if (locals.loggedin) { %>
+    <a href="/account" title="Click to manage account" class="underline-none"
+      >Welcome, <%= locals.accountData.account_firstname %></a
+    >
+    <a title="Click to log out" href="/account/logout" class="underline-none"
+      >Log Out</a
+    >
+    <% } else { %>
     <a title="Click to log in" href="/account/login" class="underline-none"
       >My Account</a
     >
+    <% } %>
   </div>
 </header>

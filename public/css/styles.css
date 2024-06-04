@@ -196,6 +196,9 @@ a {
 
 #top-header > #tools {
   align-self: flex-start;
+  display: flex;
+  gap: 2rem;
+
   font-size: small;
 }
 

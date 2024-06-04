@@ -210,6 +210,47 @@ Util.checkJWTToken = (req, res, next) => {
 };
 
 /* ****************************************
+ * Middleware to check user matches request
+ **************************************** */
+Util.checkUserMatch = (req, res, next) => {
+  const account_id = parseInt(req.params.account_id);
+  if (res.locals.loggedin) {
+    if (account_id == res.locals.accountData.account_id) {
+      next();
+    } else {
+      req.flash("notice", "You do not have permission to view this page.");
+      return res.redirect("/account/login");
+    }
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
+
+/* ****************************************
+ * Middleware to check user rights
+ **************************************** */
+Util.checkUserRights = (req, res, next) => {
+  // check if loggend in
+  if (res.locals.loggedin) {
+    if (res.locals.accountData) {
+      if (
+        res.locals.accountData.role === "admin" ||
+        res.locals.accountData.role === "employee"
+      ) {
+        next();
+      } else {
+        req.flash("notice", "You do not have permission to view this page.");
+        return res.redirect("/account/login");
+      }
+    }
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
+
+/* ****************************************
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
