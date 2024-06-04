@@ -1,0 +1,76 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="contentHeader"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+<!-- message section -->
+<%- messages() %> <% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id -->
+
+<form class="form-card" action="/inv/delete/" method="POST" id="updateForm">
+  <label
+    >Make
+    <input
+      readonly
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      placeholder="Ford"
+      required
+      value="<%= inv_make %>"
+    />
+  </label>
+  <label
+    >Model
+    <input
+      readonly
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      placeholder="Mustang"
+      required
+      value="<%= inv_model %>"
+    />
+  </label>
+  <label
+    >Year
+    <input
+      readonly
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      placeholder="2021"
+      required
+      pattern="^[0-9]{4}$"
+      value="<%= inv_year %>"
+    />
+  </label>
+
+  <label
+    >Price
+    <input
+      readonly
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      placeholder="25000"
+      required
+      value="<%= inv_price %>"
+    />
+  </label>
+
+  <p class="danger">This deletion is permanent.</p>
+  <button class="alert" type="submit">Delete?</button>
+
+  <input
+    type="hidden"
+    name="inv_id"
+    value="<%= locals.inv_id ? locals.inv_id : '' %>"
+  />
+</form>

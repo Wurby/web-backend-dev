@@ -54,6 +54,18 @@ async function getVehicleDetail(vehicle_id) {
   }
 }
 
+async function deleteInventory(inv_id) {
+  try {
+    const data = await pool.query(
+      `DELETE FROM public.inventory WHERE inv_id = $1`,
+      [inv_id]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("deleteInventory error " + error);
+  }
+}
+
 async function addInventory(
   inv_make,
   inv_model,
@@ -134,6 +146,7 @@ module.exports = {
   getInventoryByClassificationId,
   getVehicleDetail,
   addClassification,
+  deleteInventory,
   editInventory,
   addInventory,
 };

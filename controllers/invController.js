@@ -110,6 +110,30 @@ invCont.buildAddInventory = async function (req, res, next) {
   });
 };
 
+invCont.buildDeleteInventoryConfirmation = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id);
+  const itemData = await invModel.getVehicleDetail(inv_id);
+  let nav = await utilities.getNav();
+  res.render("./inventory/delete-inventory", {
+    title: "Delete " + itemData[0].inv_make + " " + itemData[0].inv_model,
+    nav,
+    errors: null,
+    ...itemData[0],
+  });
+};
+
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id);
+  const result = await invModel.deleteInventory(inv_id);
+  if (result) {
+    req.flash("notice", "The item was successfully deleted.");
+    res.redirect("/inv/");
+  } else {
+    req.flash("notice", "Sorry, the delete failed.");
+    res.redirect("/inv/");
+  }
+};
+
 invCont.processAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
   const { classification_name } = req.body;

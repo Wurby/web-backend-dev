@@ -17,6 +17,12 @@ router.get(
   "/edit/:inv_id",
   utilities.handleErrors(invController.editInventoryView)
 );
+router.get(
+  "/delete/:inv_id",
+  utilities.handleErrors(invController.buildDeleteInventoryConfirmation)
+);
+
+router.post("/delete", utilities.handleErrors(invController.deleteInventory));
 
 router.post(
   "/update",
