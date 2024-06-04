@@ -1,6 +1,8 @@
 const utilities = require("../utilities/index.js");
 const accountModel = require("../models/account-model");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 /* ****************************************
  *  Deliver login view
@@ -27,45 +29,56 @@ async function buildRegister(req, res, next) {
 }
 
 /* ****************************************
- *  Process Login
+ *  Deliver root view
  * *************************************** */
-async function loginAccount(req, res) {
+
+async function buildManageAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/management", {
+    title: "My Account",
+    nav,
+    errors: null,
+  });
+}
+
+/* ****************************************
+ *  Process login request
+ * ************************************ */
+async function accountLogin(req, res) {
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
-
-  // Hash the password before storing
-  let hashedPassword;
-  try {
-    // regular password and cost (salt is generated automatically)
-    hashedPassword = await bcrypt.hashSync(account_password, 10);
-  } catch (error) {
-    req.flash("notice", "Sorry, there was an error processing the login.");
-    res.status(500).render("account/login", {
+  const accountData = await accountModel.getAccountByEmail(account_email);
+  if (!accountData) {
+    req.flash("notice", "Please check your credentials and try again.");
+    res.status(400).render("account/login", {
       title: "Login",
       nav,
       errors: null,
+      account_email,
     });
+    return;
   }
-
-  const loginResult = await accountModel.loginAccount(
-    account_email,
-    hashedPassword
-  );
-
-  if (loginResult) {
-    req.flash("notice", "You're logged in.");
-    res.status(200).render("account/login", {
-      title: "Login",
-      nav,
-      errors: null,
-    });
-  } else {
-    req.flash("notice", "Sorry, the login failed.");
-    res.status(401).render("account/login", {
-      title: "Login",
-      errors: null,
-      nav,
-    });
+  try {
+    if (await bcrypt.compare(account_password, accountData.account_password)) {
+      delete accountData.account_password;
+      const accessToken = jwt.sign(
+        accountData,
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: 3600 }
+      );
+      if (process.env.NODE_ENV === "development") {
+        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+      } else {
+        res.cookie("jwt", accessToken, {
+          httpOnly: true,
+          secure: true,
+          maxAge: 3600 * 1000,
+        });
+      }
+      return res.redirect("/account/");
+    }
+  } catch (error) {
+    return new Error("Access Forbidden");
   }
 }
 
@@ -125,4 +138,10 @@ async function registerAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, loginAccount, registerAccount };
+module.exports = {
+  buildLogin,
+  buildRegister,
+  accountLogin,
+  registerAccount,
+  buildManageAccount,
+};

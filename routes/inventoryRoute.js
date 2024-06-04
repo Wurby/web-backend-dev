@@ -9,6 +9,22 @@ const utilities = require("../utilities/index.js");
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:vehicleId", invController.buildVehicleDetail);
 router.get("/add-classification", invController.buildAddClassification);
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+
+router.post(
+  "/update",
+  invValidate.editInventoryRules(),
+  invValidate.checkEditInventoryFields,
+  utilities.handleErrors(invController.processEditInventory)
+);
+
 router.post(
   "/add-classification",
   invValidate.checkClassificationExists,

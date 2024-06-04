@@ -1,0 +1,12 @@
+<% if (title) { %>
+<h1 class="contentHeader"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<p><%- messages() %></p>
+<% if (errors) { %>
+<ul class="alert alert-danger">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>

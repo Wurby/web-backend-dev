@@ -15,6 +15,77 @@ invValidate.classificationRules = () => {
   ];
 };
 
+invValidate.editInventoryRules = () => {
+  return [
+    body("inv_make")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a make."),
+    body("inv_model")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a model."),
+    body("inv_year")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 4, max: 4 })
+      .withMessage("Please provide a 4-digit year."),
+    body("inv_description")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a description."),
+    body("inv_image")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Server Error, image not found."),
+    body("inv_thumbnail")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Server Error, thumbnail not found."),
+    body("inv_price")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a price."),
+    body("inv_miles")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide miles."),
+    body("inv_color")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a color."),
+    body("classification_id")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please select a classification."),
+    body("inv_id")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("There was an error with the inventory ID."),
+  ];
+};
+
 invValidate.inventoryRules = () => {
   return [
     body("inv_make")
@@ -141,18 +212,39 @@ invValidate.checkInventoryFields = async (req, res, next) => {
     classification_id,
   } = req.body;
   const nav = await utilities.getNav();
-  const classificationList = await utilities.buildClassificationList();
+  const classificationList = await invModel.getClassifications();
   let errors = [];
 
   errors = validationResult(req);
   if (!errors.isEmpty()) {
-    req.flash("notice", "Please correct the following errors:");
+    req.flash("notice", errors);
     res.status(500).render("inventory/add-inventory", {
       errors,
       nav,
       title: "Add Inventory",
       classificationList,
       ...utilities.defaultClassificationFormItems,
+    });
+    return;
+  }
+
+  next();
+};
+
+invValidate.checkEditInventoryFields = async (req, res, next) => {
+  const nav = await utilities.getNav();
+  const classificationList = await invModel.getClassifications();
+  let errors = [];
+
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash("notice", errors);
+    res.status(500).render("inventory/edit-inventory", {
+      errors,
+      nav,
+      title: "Edit Inventory",
+      classificationList,
+      ...req.body,
     });
     return;
   }
